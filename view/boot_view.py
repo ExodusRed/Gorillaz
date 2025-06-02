@@ -1,33 +1,32 @@
 import tkinter as tk
 
-# class Style():
-#     def __init__(self, bg, fg, font, font_size):
-#         self.bg = bg
-#         self.fg = fg
-#         self.font = font
-#         self.font_size = font_size
-#         self.title_font_size = int(font_size*1.2)
+class Style():
+    def __init__(self, bg, fg, font, font_size):
+        self.bg = bg
+        self.fg = fg
+        self.font = font
+        self.font_size = font_size
+        self.title_font_size = int(font_size*1.2)
 
         
 
-#         self.title_font_size = 18
+        self.title_font_size = 18
 
-#         # print(self.font_size, self.title_font_size)
+        # print(self.font_size, self.title_font_size)
 
 class BootView(tk.Frame):
-    def __init__(self, master, controller, style):
+    def __init__(self, master, controller):
         super().__init__(master)
         self.controller = controller
-        self.style = style
 
         # self.columnconfigure(0, weight=1)
         # self.rowconfigure(0, weight=1)
-        # self["bg"] = "red"
+        self["bg"] = "red"
 
 
         # Test
-        # master.rowconfigure(0, weight=1)
-        # master.columnconfigure(0, weight=1)
+        master.rowconfigure(0, weight=1)
+        master.columnconfigure(0, weight=1)
 
         # self.config(bg="grey")
 
@@ -37,9 +36,9 @@ class BootView(tk.Frame):
         The wind speed is shown by a directional arrow at the bottom of the playing field, 
         its length relative to its strength."""
 
-        # TEMP | ?
+        # TEMP
         # style = Style("black", "white", "Fixedsys", 16)
-        # self.style = Style("black", "white", "Terminal", 17)
+        self.style = Style("black", "white", "Terminal", 17)
 
         self.create_widgets(self.style)
 
@@ -47,15 +46,31 @@ class BootView(tk.Frame):
         self.bind("<Configure>", self.on_configure)
         self.bind("<Key>", self.on_continue)
         # master.bind("<Key>", self.on_continue)
+        # self.bind("<Button-1>", self.on_continue)
         # self.bind("<Key>", lambda e: print("key pressed..."))
         # self.focus_set() # Need focus to register events
 
         # self.bind("<Return>", self.on_ret)
 
+        print("Should be binded")
+
+        # self.focus_set()
+
 
         # TEMP
         # self.style = Style("black", "white", "Terminal", 17)
 
+    def on_ret(self, event):
+        print("Return.")
+
+    def ps(self, x, y):
+        self.update()
+        print("After Delay:")
+        print(x, y)
+
+    def get_frame_size(self):
+        # self.after(100, )
+        pass
 
     # def wait_for_size(self, delay=10):
     #     width, height = self.winfo_width(), self.winfo_height()
@@ -80,20 +95,24 @@ class BootView(tk.Frame):
         print("Animating...")
 
     def start_animation(self, width, height, style):
+        # Drawing starts
         self.update()
         print("On Anim:")
+        print("Loading...") # Starts actually earlier / Temp
+        print(width, height)
+        # print(self.winfo_screenheight(), self.winfo_height())
+        # self.after(100, lambda: self.ps(self.winfo_width(), self.winfo_height()))
+        # w, h = self.wait_for_size()
         for item in range (12):
-            star = tk.Label(self, text="*", bg=style.bg, fg="red", font=(style.font, 28), padx=0, pady=0, bd=0)
-            star.place(x=(width - (width * item)), y=0, width=20, height=20)
+            star = tk.Label(self, text="*", bg=style.bg, fg="red", font=(style.font, int(style.font_size * 1.6)), padx=0, pady=0, bd=0)
+            star.place(x=(width - (width * item)), y=0, width=10, height=10)
 
     def on_configure(self, event):
         print("On Config")
         if (event.width > 1 and event.height > 1):
             self.unbind("<Congfigure>")
-            self.focus_set() ###
-            # self.animate(event.width, event.height) ?
+            # self.animate(event.width, event.height)
             self.start_animation(event.width, event.height, self.style)
-
 
                             
 
@@ -104,8 +123,15 @@ class BootView(tk.Frame):
         self.content_frame = tk.Frame(self, bg="violet")
         self.text_frame = tk.Frame(self.content_frame, bg="purple")
 
+        self.rowconfigure(0, weight=1)
+        # self.rowconfigure(1, weight=1)
+        # self.rowconfigure(2, weight=1)
+
+        self.config(bg="green")
+
         self.content_frame.rowconfigure(0, weight=1)
         self.content_frame.columnconfigure(0, weight=1)
+
 
         self.title_label = tk.Label(self.text_frame, text="Python GORILLAS", bg=style.bg, fg=style.fg, font=(style.font, style.title_font_size))
         self.legal_notice = tk.Label(self.text_frame, text="Copyleft (\u2183)", bg=style.bg, fg=style.fg, font=(style.font, style.font_size))
@@ -122,6 +148,7 @@ class BootView(tk.Frame):
 
         self.prompt_label.grid(row=1, column=0, pady=(0, 80))
 
+
         # dev
         # self.start_animation(style)
         
@@ -129,8 +156,7 @@ class BootView(tk.Frame):
     def on_continue(self, event):
         # self.controller.start_presets()
         print("Continue...")
-        self.controller.view_controller.show_view("presets")
-        # Unbind all from frame / view
+        self.controller.view_controller.show_view("presets_view")
 
 
 

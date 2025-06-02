@@ -2,7 +2,7 @@ import tkinter as tk
 
 
 class Menu(tk.Frame):
-    def __init__(self, master, controller, style):
+    def __init__(self, master, controller):
         super().__init__()
         self.create_widgets()
         # self["bg"] = "black"

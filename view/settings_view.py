@@ -1,5 +1,3 @@
-# Optional
-
 import tkinter as tk
 
 
