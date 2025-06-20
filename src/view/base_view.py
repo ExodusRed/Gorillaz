@@ -11,7 +11,7 @@ class BaseView(tk.Frame):
         super().__init__(master, bg=self.BG, *args, **kwargs)
         # self.controller = controller
         # self.model = model
-        base_name = __class__.__name__.replace("View", "").lower()
+        base_name = self.__class__.__name__.replace("View", "").lower()
         class_prefix = base_name.capitalize()
 
 
@@ -26,7 +26,7 @@ class BaseView(tk.Frame):
 
         # Dynamically import model
         try:
-            model_module = importlib.import_module(f"model.{base_name}_controller")
+            model_module = importlib.import_module(f"model.{base_name}_model")
             model_class = getattr(model_module, f"{class_prefix}Model")
             self.model = model_class()
         except (ImportError, AttributeError) as e:

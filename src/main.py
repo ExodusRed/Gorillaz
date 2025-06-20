@@ -20,6 +20,9 @@ class Game(tk.Tk):
         # No do it in the controller
         self.view_controller = ViewController(self)
         self.game_controller = GameController(self, self.view_controller)
+
+        self.rowconfigure(0, weight=1)
+        self.columnconfigure(0, weight=1)
         
 
         self.start_game()
