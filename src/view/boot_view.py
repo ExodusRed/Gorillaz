@@ -1,136 +1,28 @@
-import tkinter as tk
+# import tkinter as tk
 
-# class Style():
-#     def __init__(self, bg, fg, font, font_size):
-#         self.bg = bg
-#         self.fg = fg
-#         self.font = font
-#         self.font_size = font_size
-#         self.title_font_size = int(font_size*1.2)
+from model.boot_model import BootModel
+from view.base_view import BaseView
+from controller.boot_controller import BootController
 
-        
-
-#         self.title_font_size = 18
-
-#         # print(self.font_size, self.title_font_size)
-
-class BootView(tk.Frame):
-    def __init__(self, master, controller, style):
+class BootView(BaseView):
+    def __init__(self, master):
         super().__init__(master)
-        self.controller = controller
-        self.style = style
+        self.boot_model = BootModel()
+        self.boot_controller = BootController()
 
-        # self.columnconfigure(0, weight=1)
-        # self.rowconfigure(0, weight=1)
-        # self["bg"] = "red"
+        self.create_elements()
 
+    def create_elements(self):
+        # copyleft
+            
+        for item in self.boot_model.texts:
+            print(item)
+        # self.canvas = tk.self.Canvas()
 
-        # Test
-        # master.rowconfigure(0, weight=1)
-        # master.columnconfigure(0, weight=1)
+    def show(self):
+        self.grid(row=0, column=0, sticky="nsew")
 
-        # self.config(bg="grey")
+    def hide(self):
+        self.grid_remove()
 
-        self.mission_text = """Your mission is to hit your opponent with the exploding 
-        banana by varying the angle and pwoer of your throw, taking
-        into account wind speed, gravity, and the city skyline.
-        The wind speed is shown by a directional arrow at the bottom of the playing field, 
-        its length relative to its strength."""
-
-        # TEMP | ?
-        # style = Style("black", "white", "Fixedsys", 16)
-        # self.style = Style("black", "white", "Terminal", 17)
-
-        self.create_widgets(self.style)
-
-        # Binding keys
-        self.bind("<Configure>", self.on_configure)
-        self.bind("<Key>", self.on_continue)
-        # master.bind("<Key>", self.on_continue)
-        # self.bind("<Key>", lambda e: print("key pressed..."))
-        # self.focus_set() # Need focus to register events
-
-        # self.bind("<Return>", self.on_ret)
-
-
-        # TEMP
-        # self.style = Style("black", "white", "Terminal", 17)
-
-
-    # def wait_for_size(self, delay=10):
-    #     width, height = self.winfo_width(), self.winfo_height()
-    #     if width > 1 and height > 1:
-    #         # callback((width, height))
-    #         return (width, height)
-    #     else:
-    #         self.after(delay, lambda: self.wait_for_size(callback, delay))
-
-
-    def wait_for_size(self, delay=10):
-        loaded = False
-        while (not loaded):
-            width, height = self.winfo_width(), self.winfo_height()
-            if (width > 1 and height > 1):
-                loaded = True
-                return (width, height)
-            else:
-                self.after_idle(delay)
-
-    def animate(self, width, height):
-        print("Animating...")
-
-    def start_animation(self, width, height, style):
-        self.update()
-        print("On Anim:")
-        for item in range (12):
-            star = tk.Label(self, text="*", bg=style.bg, fg="red", font=(style.font, 28), padx=0, pady=0, bd=0)
-            star.place(x=(width - (width * item)), y=0, width=20, height=20)
-
-    def on_configure(self, event):
-        print("On Config")
-        if (event.width > 1 and event.height > 1):
-            self.unbind("<Congfigure>")
-            self.focus_set() ###
-            # self.animate(event.width, event.height) ?
-            self.start_animation(event.width, event.height, self.style)
-
-
-                            
-
-    def create_widgets(self, style):
-        self.columnconfigure(0, weight=1)
-        self.rowconfigure(0, weight=1)
-
-        self.content_frame = tk.Frame(self, bg="violet")
-        self.text_frame = tk.Frame(self.content_frame, bg="purple")
-
-        self.content_frame.rowconfigure(0, weight=1)
-        self.content_frame.columnconfigure(0, weight=1)
-
-        self.title_label = tk.Label(self.text_frame, text="Python GORILLAS", bg=style.bg, fg=style.fg, font=(style.font, style.title_font_size))
-        self.legal_notice = tk.Label(self.text_frame, text="Copyleft (\u2183)", bg=style.bg, fg=style.fg, font=(style.font, style.font_size))
-        self.mission_notice = tk.Label(self.text_frame, text=self.mission_text, bg=style.bg, fg=style.fg, font=(style.font, style.font_size))
-
-        self.prompt_label = tk.Label(self, text="<Press any key to continue>", bg=style.bg, fg=style.fg, font=(style.font, style.font_size))
-
-        self.content_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
-        self.text_frame.grid(row=0, column=0, padx=10, pady=10)
-
-        self.title_label.grid(row=0, column=0, pady=2)
-        self.legal_notice.grid(row=1, column=0, pady=2)
-        self.mission_notice.grid(row=2, column=0)
-
-        self.prompt_label.grid(row=1, column=0, pady=(0, 80))
-
-        # dev
-        # self.start_animation(style)
         
-
-    def on_continue(self, event):
-        # self.controller.start_presets()
-        print("Continue...")
-        self.controller.view_controller.show_view("presets")
-        # Unbind all from frame / view
-
-
-

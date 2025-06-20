@@ -1,47 +1,52 @@
-from style import Style
+import importlib
 
 class ViewController:
-    def __init__(self, root, controller):
-        self.root = root
-        self.controller = controller
+    def __init__(self, game):
+        self.game = game
         self.views = {}
-        self.view_classes = {}
+        self.current_view = None
 
-        # self.style = Style()
-        self.style = Style("black", "white", "Terminal", 18)
+        self.VIRT_W, self.VIRT_H = 320, 200
+        
+        self.SW, self.SH = self.game.winfo_screenwidth(), game.winfo_screenheight()
+
+        self.S = self.get_scalar()
+
+        self.font = ("Terminal", self.S * 4)
+
+        self.set_game_size()
+        self.center_game()
 
 
-    def register_view(self, name: str, view_class, eager: bool = True):
-        view = view_class(master=self.root, controller=self.controller, style=self.style)
-        # view.grid(row=0, column=0, sticky="nsew")
-        # self.views[view_name] = view
+    def get_scalar(self):
+        S = min((self.SW // self.VIRT_W), (self.SH // self.VIRT_H))
+        return S
 
-        self.view_classes[name] = view_class
+    def set_game_size(self):
+        self.game.geometry(f"{self.VIRT_W * self.S}x{self.VIRT_H * self.S}")
 
-        if eager:
-            view = view_class(master=self.root, controller=self.controller, style=self.style)
-            view.grid(row=0, column=0, sticky="nsew")
-            self.views[name] = view
+    def center_game(self):
+        self.game.update_idletasks()
+        ww, wh = self.game.winfo_width(), self.game.winfo_height()
+        x, y = (self.SW // 2) - (ww // 2), (self.SH // 2) - (wh // 2)
+        self.game.geometry(f"+{x}+{y}")
 
-        # view.config(takefocus=1, bg="red") // Has got nothing to do here // keep for later, use below
 
-    def show_view(self, name: str, **kwargs):
-
-        # Unbind from previous frames?
-
+    def show_view(self, name: str):
         if name not in self.views:
-            # Lazy-loading the view if it hasn't been instantiated yet
-            view_class = self.view_classes[name]
-            view = view_class(master=self.root, controller=self.controller, style=self.style, **kwargs)
-            view.config(bg="blue") # Is overwritten?
-            view.columnconfigure(0, weight=1)
-            view.rowconfigure(0, weight=1)
-            view.grid(row=0, column=0, sticky="nsew")
-            self.views[name] = view
-        else:
-            view = self.views[name]
-            if hasattr(view, "on_show"):
-                view.on_show(**kwargs) # pass args for its init
+            class_name = name.capitalize() + "View"
+            module_name = f"view.{name}_view"
 
+            try:
+                module = importlib.import_module(module_name)
+                view_class = getattr(module, class_name)
+                self.views[name] = view_class(self.game)
+            except (ImportError, AttributeError) as e:
+                print(f"[ERROR] Could not load view '{name}': {e}")
+                return
+            
+        if self.current_view:
+            self.views[self.current_view].hide()
 
-        self.views[name].tkraise()
+        self.current_view = name
+        self.views[self.current_view].show()
