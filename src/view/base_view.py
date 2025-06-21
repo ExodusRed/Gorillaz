@@ -59,5 +59,5 @@ class BaseView(tk.Frame):
             style.update(override)
         return style
     
-    def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, pixel_size: int = 2, spacing: int = 1, color: str = "#FFFFFF"):
+    def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
         draw_text(canvas, text, x, y, pixel_size, spacing, color)

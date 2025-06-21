@@ -14,13 +14,14 @@ class ViewController:
         self.views = {}
         self.current_view = None
 
-        self.VIRT_W, self.VIRT_H = 320, 200
+        # self.VIRT_W, self.VIRT_H = 320, 200
+        self.VIRT_W, self.VIRT_H = 640, 350
         
         self.SW, self.SH = self.game.winfo_screenwidth(), game.winfo_screenheight()
 
         self.S = self.get_scalar()
 
-        # self.S = 1 # Testing
+        self.S = 1 # Testing
 
         # self.font = ("Terminal", self.S * 4)
 
