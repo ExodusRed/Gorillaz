@@ -7,9 +7,9 @@ from view.view_utils import draw_text
 class BaseView(tk.Frame):
     FG = "#FFFFFF"
     BG = "#000000"
-    FONT = "Terminal"
-    FONT = "Fixedsys"
-    # FONT = "System"
+    # FONT = "Terminal"
+    # FONT = "Fixedsys"
+    FONT = "System"
     FONT_SIZE = 6
 
     def __init__(self, master, scalar=None, *args, **kwargs):
@@ -34,6 +34,8 @@ class BaseView(tk.Frame):
             model_module = importlib.import_module(f"model.{base_name}_model")
             model_class = getattr(model_module, f"{class_prefix}Model")
             self.model = model_class()
+            print(self.model)
+            print(model_class)
         except (ImportError, AttributeError) as e:
             print(f"[BaseView] Warning: Failed to load Model for {base_name} → {e}")
             self.model = None
@@ -56,3 +58,6 @@ class BaseView(tk.Frame):
         if override:
             style.update(override)
         return style
+    
+    def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, pixel_size: int = 2, spacing: int = 1, color: str = "#FFFFFF"):
+        draw_text(canvas, text, x, y, pixel_size, spacing, color)

@@ -5,6 +5,8 @@ import sys
 # if project_root not in sys.path:
 #     sys.path.insert(0, project_root)
 
+# Keep incase of import errors since this is more reliable
+
 def get_assets_path():
     print(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'assets')))
     return os.path.abspath(
@@ -22,12 +24,6 @@ def add_assets_to_sys_path():
         return 0
     
 def add_root_to_sys_path():
-    # project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-
-    # project_root = os.path.abspath(os.path.join(os.path.dirname(__file__)))
-    # if project_root not in sys.path:
-    #     sys.path.insert(0, project_root)
-
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     if project_root not in sys.path:
         sys.path.insert(0, project_root)

@@ -1,23 +1,10 @@
 import importlib
 
-# import sys
-# import os
-
-# # Add project root to sys.path
-# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
-
 import sys
 import os
 
-# Add project root to sys.path
-# project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-# if project_root not in sys.path:
-#     sys.path.insert(0, project_root)
-
 
 import utils
-# utils.add_assets_to_sys_path()
 utils.add_root_to_sys_path()
 
 
@@ -80,7 +67,3 @@ class ViewController:
 
         self.current_view = name
         self.views[self.current_view].show()
-
-    # def draw_char(canvas, char, x, y, pixel_size=4, bg="#000000", fg=None):
-    #     bitmap = PIXEL_FONT_8X8.get(char, PIXEL_FONT_8X8.get('?'))
-
