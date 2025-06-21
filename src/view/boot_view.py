@@ -1,14 +1,14 @@
 import tkinter as tk
 
-from model.boot_model import BootModel
+# from model.boot_model import BootModel
 from view.base_view import BaseView
-from controller.boot_controller import BootController
+# from controller.boot_controller import BootController
 
 class BootView(BaseView):
     def __init__(self, master, scalar: int):
         super().__init__(master)
-        self.boot_model = BootModel()
-        self.boot_controller = BootController()
+        # self.boot_model = BootModel()
+        # self.boot_controller = BootController()
 
         self.S = scalar
         # self.S = 1

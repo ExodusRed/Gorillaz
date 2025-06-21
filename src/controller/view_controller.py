@@ -1,11 +1,26 @@
 import importlib
 
-# from ..assets.font import PIXEL_FONT_8X8
-# from '../assets/font' import PIXEL_FONT_8X8
+# import sys
+# import os
+
+# # Add project root to sys.path
+# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+
 import sys
 import os
 
-# If you insist on using relative imports, change the import to:
+# Add project root to sys.path
+# project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+# if project_root not in sys.path:
+#     sys.path.insert(0, project_root)
+
+
+import utils
+# utils.add_assets_to_sys_path()
+utils.add_root_to_sys_path()
+
+
 class ViewController:
     def __init__(self, game):
         self.game = game
@@ -21,6 +36,13 @@ class ViewController:
         # self.S = 1 # Testing
 
         # self.font = ("Terminal", self.S * 4)
+
+        # if (utils.add_assets_to_sys_path() == 1):
+            # from assets.fonts.font import PIXEL_FONT_8X8
+            # import assets.font
+            # import assets.fonts
+
+            # pass
 
         self.set_game_size()
         self.center_game()
@@ -59,5 +81,6 @@ class ViewController:
         self.current_view = name
         self.views[self.current_view].show()
 
-    def draw_char(canvas, char, x, y, pixel_size=4, bg="#000000", fg=None):
-        bitmap = PIXEL_FONT_8X8.get(char, PIXEL_FONT_8X8.get('?'))
+    # def draw_char(canvas, char, x, y, pixel_size=4, bg="#000000", fg=None):
+    #     bitmap = PIXEL_FONT_8X8.get(char, PIXEL_FONT_8X8.get('?'))
+

@@ -1,6 +1,9 @@
 import tkinter as tk
 import importlib
 
+# import view.view_utils as view_utils
+from view.view_utils import draw_text
+
 class BaseView(tk.Frame):
     FG = "#FFFFFF"
     BG = "#000000"
