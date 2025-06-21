@@ -1,5 +1,11 @@
 import importlib
 
+# from ..assets.font import PIXEL_FONT_8X8
+# from '../assets/font' import PIXEL_FONT_8X8
+import sys
+import os
+
+# If you insist on using relative imports, change the import to:
 class ViewController:
     def __init__(self, game):
         self.game = game
@@ -12,7 +18,9 @@ class ViewController:
 
         self.S = self.get_scalar()
 
-        self.font = ("Terminal", self.S * 4)
+        # self.S = 1 # Testing
+
+        # self.font = ("Terminal", self.S * 4)
 
         self.set_game_size()
         self.center_game()
@@ -40,7 +48,7 @@ class ViewController:
             try:
                 module = importlib.import_module(module_name)
                 view_class = getattr(module, class_name)
-                self.views[name] = view_class(self.game)
+                self.views[name] = view_class(self.game, self.S)
             except (ImportError, AttributeError) as e:
                 print(f"[ERROR] Could not load view '{name}': {e}")
                 return
@@ -50,3 +58,6 @@ class ViewController:
 
         self.current_view = name
         self.views[self.current_view].show()
+
+    def draw_char(canvas, char, x, y, pixel_size=4, bg="#000000", fg=None):
+        bitmap = PIXEL_FONT_8X8.get(char, PIXEL_FONT_8X8.get('?'))

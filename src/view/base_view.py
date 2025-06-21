@@ -5,6 +5,8 @@ class BaseView(tk.Frame):
     FG = "#FFFFFF"
     BG = "#000000"
     FONT = "Terminal"
+    FONT = "Fixedsys"
+    # FONT = "System"
     FONT_SIZE = 6
 
     def __init__(self, master, scalar=None, *args, **kwargs):
@@ -47,7 +49,7 @@ class BaseView(tk.Frame):
             "fg": self.FG,
             "bg":self.BG,
             "font": self.get_font()
-            }
+        }
         if override:
             style.update(override)
         return style
