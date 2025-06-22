@@ -20,6 +20,9 @@ class BaseView(tk.Frame):
         super().__init__(master, bg=self.BG, *args, **kwargs)
         # self.controller = controller
         # self.model = model
+
+        self.master = master
+
         base_name = self.__class__.__name__.replace("View", "").lower()
         class_prefix = base_name.capitalize()
 
@@ -27,14 +30,7 @@ class BaseView(tk.Frame):
         self.FONT_B = get_font("5x9b")
 
 
-        # Dynamically import controller
-        try:
-            controller_module = importlib.import_module(f"controller.{base_name}_controller")
-            controller_class = getattr(controller_module, f"{class_prefix}Controller")
-            self.controller = controller_class()
-        except (ImportError, AttributeError) as e:
-            print(f"[BaseView] Warning: Failed to load controller for {base_name} → {e}")
-            self.controller = None
+
 
         # Dynamically import model
         try:
@@ -46,6 +42,15 @@ class BaseView(tk.Frame):
         except (ImportError, AttributeError) as e:
             print(f"[BaseView] Warning: Failed to load Model for {base_name} → {e}")
             self.model = None
+
+        # Dynamically import controller
+        try:
+            controller_module = importlib.import_module(f"controller.{base_name}_controller")
+            controller_class = getattr(controller_module, f"{class_prefix}Controller")
+            self.controller = controller_class(self, self.model)
+        except (ImportError, AttributeError) as e:
+            print(f"[BaseView] Warning: Failed to load controller for {base_name} → {e}")
+            self.controller = None
 
 
         self.S = scalar
@@ -84,5 +89,14 @@ class BaseView(tk.Frame):
     
     
     def get_text_width(self, text, scalar = 1, spacing = 1, font_width = 5):
-        return ((font_width + spacing) * scalar) * len(text)
         # return ((font_width + spacing) * scalar) * len(text)
+        # return ((font_width + spacing) * scalar) * len(text)
+        return ((font_width + spacing) * scalar) * len(text)
+    
+
+    
+    def show(self):
+        self.grid(row=0, column=0, sticky="nsew")
+
+    def hide(self):
+        self.grid_remove()

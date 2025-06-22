@@ -12,6 +12,9 @@ class BootView(BaseView):
 
         self.S = scalar # not needed, but keep for later adaptability
 
+        # self.focus()
+        # self.bind("<Key>", lambda e: print(e.keysym))
+
         self.create_elements()
 
     def create_elements(self):
@@ -57,24 +60,25 @@ class BootView(BaseView):
         self.title = self.draw_text(
             self.canvas,
             text=texts["title"],
-            x=(self.center_pos[0]) - (self.get_text_width(texts["title"], self.S) // 2),
-            y=50 * self.S,
+            x=(self.center_pos[0]) - (self.get_text_width(texts["title"], self.S, 2) // 2),
+            y=60 * self.S,
             font=self.FONT_B,
             pixel_size=self.S,
             spacing=2
         )
 
-        self.legal_notice = self.draw_text(self.canvas, text=texts["legal_notice"], x=(self.center_pos[0]) - self.get_text_width(texts["legal_notice"], self.S) // 2, y=80 * self.S, pixel_size=self.S)
+        self.legal_notice = self.draw_text(
+            self.canvas, text=texts["legal_notice"],
+            x=(self.center_pos[0]) - self.get_text_width(texts["legal_notice"], self.S) // 2,
+            y=90 * self.S, pixel_size=self.S
+            )
 
         for line_index, line in enumerate(texts["mission_objective"].split("\n")):
             # print(len(line) * (5 + 1)) - this line actually saved me
             spacing = 1 * self.S
-            # text_width = ((len(line) + spacing) * 5) * self.S
-            # text_width = (5 + 1)  * len(line) * self.S
-            # text_width = self.get_text_width(line)
-            # text_width = (((5 + 1) * self.S)* len(line))
+            
+            text_width = self.get_text_width(line, self.S, spacing, self.FONT["width"])
 
-            text_width = ((5 + 1) * self.S) * len(line)
 
             print(f"text width: {text_width}")
 
@@ -82,9 +86,18 @@ class BootView(BaseView):
             print(((self.VIRT_W * self.S) // 2) - (text_width // 2))
 
             # self.draw_text(self.canvas, line, (self.center_pos[0] // 2) - (text_width // 2), (line_index * 20) + 100, self.S * 1, spacing)
-            self.draw_text(self.canvas, line, x=(self.center_pos[0]) - (text_width // 2), y=((line_index) * 16 + 100) * self.S, pixel_size=self.S * 1, spacing=spacing)
+            self.draw_text(self.canvas, line, x=(self.center_pos[0]) - (text_width // 2), y=((line_index) * 16 + 120) * self.S, pixel_size=self.S * 1, spacing=spacing)
 
         # self.draw_text(self.canvas, texts["prompt"], (self.center_pos[0] - (text_width // 2)), 100)
+
+        self.prompt = self.draw_text(
+            self.canvas,
+            text = texts["prompt"],
+            x = self.center_pos[0] - self.get_text_width(texts["prompt"]) // 2,
+            y = 260 * self.S,
+            pixel_size = self.S
+            
+        )
 
 
         
@@ -96,10 +109,10 @@ class BootView(BaseView):
             
 
 
-    def show(self):
-        self.grid(row=0, column=0, sticky="nsew")
+    # def show(self):
+    #     self.grid(row=0, column=0, sticky="nsew")
 
-    def hide(self):
-        self.grid_remove()
+    # def hide(self):
+    #     self.grid_remove()
 
         

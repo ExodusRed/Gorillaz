@@ -5,6 +5,6 @@ class BootController:
 
         # active_binds = {}
 
-        self.view.focus()
+        # self.view.focus()
         # self.view.bind("<Key>", lambda e: print(e.keysym))
-        self.view.bind("<Key>", lambda e: self.view.master.view_controller.show_view("preset"))
+        
