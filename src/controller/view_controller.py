@@ -3,7 +3,6 @@ import importlib
 import sys
 import os
 
-
 import utils
 utils.add_root_to_sys_path()
 
@@ -21,7 +20,7 @@ class ViewController:
 
         self.S = self.get_scalar()
 
-        self.S = 1 # Testing
+        # self.S = 1 # Testing
 
         # self.font = ("Terminal", self.S * 4)
 

@@ -54,7 +54,15 @@ class BootView(BaseView):
         #         print(line)
         #         self.draw_text(self.canvas, line, 50, (text_y * line_index) + 30, 2)
 
-        self.title = self.draw_text(self.canvas, text=texts["title"], x=(self.center_pos[0]) - (self.get_text_width(texts["title"], self.S) // 2), y=50 * self.S, pixel_size=self.S)
+        self.title = self.draw_text(
+            self.canvas,
+            text=texts["title"],
+            x=(self.center_pos[0]) - (self.get_text_width(texts["title"], self.S) // 2),
+            y=50 * self.S,
+            font=self.FONT_B,
+            pixel_size=self.S,
+            spacing=2
+        )
 
         self.legal_notice = self.draw_text(self.canvas, text=texts["legal_notice"], x=(self.center_pos[0]) - self.get_text_width(texts["legal_notice"], self.S) // 2, y=80 * self.S, pixel_size=self.S)
 
@@ -74,7 +82,7 @@ class BootView(BaseView):
             print(((self.VIRT_W * self.S) // 2) - (text_width // 2))
 
             # self.draw_text(self.canvas, line, (self.center_pos[0] // 2) - (text_width // 2), (line_index * 20) + 100, self.S * 1, spacing)
-            self.draw_text(self.canvas, line, (self.center_pos[0]) - (text_width // 2), ((line_index) * 16 + 100) * self.S, self.S * 1, spacing)
+            self.draw_text(self.canvas, line, x=(self.center_pos[0]) - (text_width // 2), y=((line_index) * 16 + 100) * self.S, pixel_size=self.S * 1, spacing=spacing)
 
         # self.draw_text(self.canvas, texts["prompt"], (self.center_pos[0] - (text_width // 2)), 100)
 

@@ -3,7 +3,8 @@ import textwrap
 class BootModel:
     def __init__(self):
         self.texts = {
-            "title": "Python GORILLAS",
+            # "title": "Python GORILLAS",
+            "title": "PYTHON GORILLAS",
             "legal_notice": "Copyleft (\u2183)",
             "mission_objective": textwrap.dedent("""
                     Your mission is to hit your opponent with the exploding 

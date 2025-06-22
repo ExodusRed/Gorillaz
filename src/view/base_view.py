@@ -2,15 +2,19 @@ import tkinter as tk
 import importlib
 
 # import view.view_utils as view_utils
-from view.view_utils import draw_text
+from view.view_utils import draw_text, get_font
 
 class BaseView(tk.Frame):
     FG = "#FFFFFF"
     BG = "#000000"
     # FONT = "Terminal"
     # FONT = "Fixedsys"
-    FONT = "System"
-    FONT_SIZE = 6
+    # FONT = "System"
+
+    FONT = get_font("5x9")
+    FONT_B = get_font("5x9b")
+
+    # FONT_SIZE = 6
 
     def __init__(self, master, scalar=None, *args, **kwargs):
         super().__init__(master, bg=self.BG, *args, **kwargs)
@@ -18,6 +22,9 @@ class BaseView(tk.Frame):
         # self.model = model
         base_name = self.__class__.__name__.replace("View", "").lower()
         class_prefix = base_name.capitalize()
+
+        self.FONT = get_font("5x9")
+        self.FONT_B = get_font("5x9b")
 
 
         # Dynamically import controller
@@ -51,8 +58,8 @@ class BaseView(tk.Frame):
         self.canvas = tk.Canvas(self, bg=self.BG)
         self.canvas.pack(fill="both", expand=True)
 
-    def get_font(self, size=None):
-        return (self.FONT, size if size else self.FONT_SIZE)
+    # def get_font(self, size=None):
+    #     return (self.FONT, size if size else self.FONT_SIZE)
     
     def style_kwargs(self, override=None):
         style = {
@@ -64,8 +71,8 @@ class BaseView(tk.Frame):
             style.update(override)
         return style
     
-    def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
-        draw_text(canvas, text, x, y, pixel_size, spacing, color)
+    def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, font=get_font("5x9"), pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
+        draw_text(canvas, text, x, y, font, pixel_size, spacing, color)
 
     def get_center_position(self):
         self.update_idletasks()
