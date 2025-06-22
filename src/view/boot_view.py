@@ -10,7 +10,7 @@ class BootView(BaseView):
         # self.boot_model = BootModel() // outsourced to base class
         # self.boot_controller = BootController() // "..."
 
-        self.S = scalar
+        self.S = scalar # not needed, but keep for later adaptability
 
         self.create_elements()
 
@@ -29,11 +29,15 @@ class BootView(BaseView):
             # self.draw_text()
 
         self.update_idletasks()
+        self.update()
 
-        center_x = self.master.winfo_width() // 2
-        center_y = self.master.winfo_height() // 2
+        # center_x = self.master.winfo_width() // 2
+        # center_y = self.master.winfo_height() // 2
 
-        print(center_x, center_y)
+        self.center_pos = self.get_center_position()
+        print(f"self.center_pos: {self.center_pos}")
+
+        # print(self.center_pos[0], self.center_pos[1])
 
         txt = "Hello World!\nABC123"
 
@@ -50,9 +54,29 @@ class BootView(BaseView):
         #         print(line)
         #         self.draw_text(self.canvas, line, 50, (text_y * line_index) + 30, 2)
 
+        self.legal_notice = self.draw_text(self.canvas, text=texts["legal_notice"], x=(self.center_pos[0]) - self.get_text_width(texts["legal_notice"], self.S) // 2, y=50, pixel_size=self.S)
+
         for line_index, line in enumerate(texts["mission_objective"].split("\n")):
-            print(len(line) * (5 + 1))
-            self.draw_text(self.canvas, line, 10, (line_index * 20) + 30, self.S * 1, 0)
+            # print(len(line) * (5 + 1)) - this line actually saved me
+            spacing = 1 * self.S
+            # text_width = ((len(line) + spacing) * 5) * self.S
+            # text_width = (5 + 1)  * len(line) * self.S
+            # text_width = self.get_text_width(line)
+            # text_width = (((5 + 1) * self.S)* len(line))
+
+            text_width = ((5 + 1) * self.S) * len(line)
+
+            print(f"text width: {text_width}")
+
+
+            print(((self.VIRT_W * self.S) // 2) - (text_width // 2))
+
+            # self.draw_text(self.canvas, line, (self.center_pos[0] // 2) - (text_width // 2), (line_index * 20) + 100, self.S * 1, spacing)
+            self.draw_text(self.canvas, line, (self.center_pos[0]) - (text_width // 2), (line_index) * 20 + 100, self.S * 1, spacing)
+
+        # self.draw_text(self.canvas, texts["prompt"], (self.center_pos[0] - (text_width // 2)), 100)
+
+
         
 
         # txt_width = len(txt) * font_size + spacing

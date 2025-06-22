@@ -21,7 +21,7 @@ class ViewController:
 
         self.S = self.get_scalar()
 
-        self.S = 1 # Testing
+        # self.S = 1 # Testing
 
         # self.font = ("Terminal", self.S * 4)
 
@@ -37,7 +37,9 @@ class ViewController:
 
 
     def get_scalar(self):
+        
         S = min((self.SW // self.VIRT_W), (self.SH // self.VIRT_H))
+        print(f"get_scalar(): {S}")
         return S
 
     def set_game_size(self):

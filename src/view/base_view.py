@@ -41,7 +41,12 @@ class BaseView(tk.Frame):
             self.model = None
 
 
-        self.scalar = scalar
+        self.S = scalar
+        self.VIRT_W = self.master.view_controller.VIRT_W
+        self.VIRT_H = self.master.view_controller.VIRT_H
+
+        # self.CENTER_POS = self.get_center_position() # Or is it not a static var?
+
 
         self.canvas = tk.Canvas(self, bg=self.BG)
         self.canvas.pack(fill="both", expand=True)
@@ -61,3 +66,16 @@ class BaseView(tk.Frame):
     
     def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
         draw_text(canvas, text, x, y, pixel_size, spacing, color)
+
+    def get_center_position(self):
+        self.update_idletasks()
+        print(self.VIRT_W, self.S)
+        # return ((self.VIRT_W * self.S) // 2, (self.VIRT_H * 8) // 2)
+        print(f"VIRT_W: {self.VIRT_W}, VIR_H: {self.VIRT_H}, SCALAR: {self.S}")
+        return ((self.VIRT_W * self.S) // 2, (self.VIRT_H * self.S) // 2)
+
+    
+    
+    def get_text_width(self, text, scalar = 1, spacing = 1, font_width = 5):
+        return ((font_width + spacing) * scalar) * len(text)
+        # return ((font_width + spacing) * scalar) * len(text)
