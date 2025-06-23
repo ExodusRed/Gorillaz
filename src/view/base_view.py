@@ -1,8 +1,13 @@
 import tkinter as tk
 import importlib
 
+
+# from model.char_model import CharModel
+# from model.font_model import FontModel
+
 # import view.view_utils as view_utils
-from view.view_utils import draw_text, get_font
+from view.view_utils import draw_text, get_font, draw_char_at
+
 
 class BaseView(tk.Frame):
     FG = "#FFFFFF"
@@ -11,8 +16,10 @@ class BaseView(tk.Frame):
     # FONT = "Fixedsys"
     # FONT = "System"
 
-    FONT = get_font("5x9")
+    # FONT = get_font("5x9")
     FONT_B = get_font("5x9b")
+
+    # FONT = FontModel()
 
     # FONT_SIZE = 6
 
@@ -28,6 +35,8 @@ class BaseView(tk.Frame):
 
         self.FONT = get_font("5x9")
         self.FONT_B = get_font("5x9b")
+
+        # self.font_model = FontModel()
 
 
 
@@ -79,6 +88,11 @@ class BaseView(tk.Frame):
     def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, font=get_font("5x9"), pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
         draw_text(canvas, text, x, y, font, pixel_size, spacing, color)
 
+    # def draw_char_at(self, canvas, )
+
+    def draw_char_at(self, canvas, char_model, char: str, x: int, y: int, pixel_size: int, color="#FFFFFF"):
+        draw_char_at(canvas, char_model, x, y, pixel_size, color)
+
     def get_center_position(self):
         self.update_idletasks()
         print(self.VIRT_W, self.S)
@@ -88,10 +102,10 @@ class BaseView(tk.Frame):
 
     
     
-    def get_text_width(self, text, scalar = 1, spacing = 1, font_width = 5):
-        # return ((font_width + spacing) * scalar) * len(text)
-        # return ((font_width + spacing) * scalar) * len(text)
-        return ((font_width + spacing) * scalar) * len(text)
+    def get_text_width(self, text, pixel_size = 1, spacing = 1, font_width = 5):
+        print(f"font_width: {(pixel_size * font_width) + spacing}")
+        print(f"text_width: {((pixel_size * font_width) + spacing) * len(text)}")
+        return ((pixel_size * font_width) + spacing) * len(text)
     
 
     

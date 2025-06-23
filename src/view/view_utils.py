@@ -4,6 +4,11 @@
 
 from assets.fonts.registry import ALL_FONTS
 
+from model.font_model import FontModel
+
+from model.char_model import CharModel
+from view.char_view import CharView
+
 def get_font(name):
     return ALL_FONTS[name]
 
@@ -48,3 +53,27 @@ def draw_text(canvas, text, x, y, font=get_font("5x9"), pixel_size=2, spacing=1,
                         fill=color
                     )
 
+# def draw_char_at(canvas, font, char: str, grid_x: int, grid_y: int, pixel_size: list[int], color = "#FFFFFF"):
+#     # bitmap = ALL_FONTS[font]["glyphs"].get(char, get_font["?"])
+#     bitmap = font["glyphs"].get(char, font["glyphs"]["?"])
+#     print(char, bitmap)
+
+#     char_model = CharModel(bitmap)
+
+#     x = grid_x * pixel_size
+#     y = grid_y * pixel_size
+
+#     CharView(canvas, char_model, x, y, pixel_size, color)
+
+
+def draw_char_at(canvas, char_model , grid_x: int, grid_y: int, pixel_size: list[int], color = "#FFFFFF"):
+    # bitmap = ALL_FONTS[font]["glyphs"].get(char, get_font["?"])
+    # bitmap = font["glyphs"].get(char, font["glyphs"]["?"])
+    # print(char, bitmap)
+
+    # char_model = CharModel(bitmap)
+
+    x = grid_x * pixel_size
+    y = grid_y * pixel_size
+    
+    CharView(canvas, char_model, x, y, pixel_size, color)

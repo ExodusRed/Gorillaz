@@ -75,9 +75,8 @@ class BootView(BaseView):
 
         for line_index, line in enumerate(texts["mission_objective"].split("\n")):
             # print(len(line) * (5 + 1)) - this line actually saved me
-            spacing = 1 * self.S
             
-            text_width = self.get_text_width(line, self.S, spacing, self.FONT["width"])
+            text_width = self.get_text_width(line, pixel_size=self.S, spacing=self.S, font_width=self.FONT["width"])
 
 
             print(f"text width: {text_width}")
@@ -86,17 +85,17 @@ class BootView(BaseView):
             print(((self.VIRT_W * self.S) // 2) - (text_width // 2))
 
             # self.draw_text(self.canvas, line, (self.center_pos[0] // 2) - (text_width // 2), (line_index * 20) + 100, self.S * 1, spacing)
-            self.draw_text(self.canvas, line, x=(self.center_pos[0]) - (text_width // 2), y=((line_index) * 16 + 120) * self.S, pixel_size=self.S * 1, spacing=spacing)
+            self.draw_text(self.canvas, line, x=(self.center_pos[0]) - (text_width // 2), y=((line_index) * 16 + 120) * self.S, pixel_size=self.S, spacing=self.S)
 
         # self.draw_text(self.canvas, texts["prompt"], (self.center_pos[0] - (text_width // 2)), 100)
 
         self.prompt = self.draw_text(
             self.canvas,
             text = texts["prompt"],
-            x = self.center_pos[0] - self.get_text_width(texts["prompt"]) // 2,
+            x = self.center_pos[0] - self.get_text_width(texts["prompt"], self.S, self.S) // 2,
             y = 260 * self.S,
-            pixel_size = self.S
-            
+            pixel_size = self.S,
+            spacing = self.S
         )
 
 
