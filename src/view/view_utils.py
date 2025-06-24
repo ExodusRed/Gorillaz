@@ -66,14 +66,17 @@ def draw_text(canvas, text, x, y, font=get_font("5x9"), pixel_size=2, spacing=1,
 #     CharView(canvas, char_model, x, y, pixel_size, color)
 
 
-def draw_char_at(canvas, char_model , grid_x: int, grid_y: int, pixel_size: list[int], color = "#FFFFFF"):
+# def draw_char_at(canvas, char_model , grid_x: int, grid_y: int, pixel_size: list[int], color = "#FFFFFF"):
+def draw_char_at(canvas, char_model , font_width: int, font_height: int, pixel_size: list[int], color = "#FFFFFF"):
     # bitmap = ALL_FONTS[font]["glyphs"].get(char, get_font["?"])
     # bitmap = font["glyphs"].get(char, font["glyphs"]["?"])
     # print(char, bitmap)
 
     # char_model = CharModel(bitmap)
 
-    x = grid_x * pixel_size
-    y = grid_y * pixel_size
+    # x = grid_x * pixel_size
+    x = font_width * pixel_size
+    # y = grid_y * pixel_size
+    y = font_height * pixel_size
     
     CharView(canvas, char_model, x, y, pixel_size, color)
