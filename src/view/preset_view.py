@@ -19,26 +19,33 @@ class PresetView(BaseView):
 
         self.start_asking()
 
-        
 
     def start_asking(self):
-        c = 0
-        text = self.model.TEXT[f"q{c}"]
-        center_x = self.get_center_position()[0]
-        print(f"center_x = {self.get_center_position()[0]}")
-        # center_x = 100
-        q0 = self.draw_text(
-            self.canvas, text,
-            x = center_x - (self.get_text_width(text,
-                pixel_size = self.S,
-                spacing = self.S,
-                font_width = 5
-            ) // 2) - 50 * self.S,
-            y = 100 * self.S,
-            font = self.FONT,
-            pixel_size = self.S,
-            spacing = self.S
-        )
+        # titel_input_model = self.text_model("Hello World!", 100, 100, self.FONT, 1, 1, "#FFFFFF")
+
+        # self.text_renderer.draw_centered(titel_input_model)
+        pass
+
+        
+
+    # def start_asking(self):
+    #     c = 0
+    #     text = self.model.TEXT[f"q{c}"]
+    #     center_x = self.get_center_position()[0]
+    #     print(f"center_x = {self.get_center_position()[0]}")
+    #     # center_x = 100
+    #     q0 = self.draw_text(
+    #         self.canvas, text,
+    #         x = center_x - (self.get_text_width(text,
+    #             pixel_size = self.S,
+    #             spacing = self.S,
+    #             font_width = 5
+    #         ) // 2) - 50 * self.S,
+    #         y = 100 * self.S,
+    #         font = self.FONT,
+    #         pixel_size = self.S,
+    #         spacing = self.S
+    #     )
     def update_prompt_and_input(self, char, question_index):
         # self.draw_text(
         #     self.canvas,
@@ -64,5 +71,5 @@ class PresetView(BaseView):
 
 
 
-        self.draw_char_at(self.canvas, font, char, 100, 200, self.S)
+        # self.draw_char_at(self.canvas, font, char, 100, 200, self.S)
 

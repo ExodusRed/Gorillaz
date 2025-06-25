@@ -15,6 +15,16 @@ class BootView(BaseView):
         # self.focus()
         # self.bind("<Key>", lambda e: print(e.keysym))
 
+        # titel_input_model = self.text_model("Hello World!", 100, 100, self.FONT, 1, 1, "#FFFFFF")
+
+        # self.text_renderer.draw_text(titel_input_model, self.FONT)
+        donkey = self.text_renderer.draw_text(self.canvas, "Donkey", 100, 100, self.FONT, 1, 1)
+        # draw_text(canvas, text, x, y, font, pixel_size=2, spacing=1, color="#FFFFFF"):
+
+        # self.after(1000, lambda: donkey.)
+
+        self.elements = {}
+
         self.create_elements()
 
     def create_elements(self):
@@ -57,46 +67,57 @@ class BootView(BaseView):
         #         print(line)
         #         self.draw_text(self.canvas, line, 50, (text_y * line_index) + 30, 2)
 
-        self.title = self.draw_text(
-            self.canvas,
-            text=texts["title"],
-            x=(self.center_pos[0]) - (self.get_text_width(texts["title"], self.S, 2) // 2),
-            y=60 * self.S,
-            font=self.FONT_B,
-            pixel_size=self.S,
-            spacing=2
-        )
+        x_pos = 0
 
-        self.legal_notice = self.draw_text(
-            self.canvas, text=texts["legal_notice"],
-            x=(self.center_pos[0]) - self.get_text_width(texts["legal_notice"], self.S) // 2,
-            y=90 * self.S, pixel_size=self.S
-            )
+        # self.elements["title"] = self.text_model(
+            # texts["title"],
+            # x = self.center_pos - self.text_model.get_dimension(self.FONT)
+            # )
 
-        for line_index, line in enumerate(texts["mission_objective"].split("\n")):
-            # print(len(line) * (5 + 1)) - this line actually saved me
+        # self.title = self.draw_text(
+        #     self.canvas,
+        #     text=texts["title"],
+        #     x=(self.center_pos[0]) - (self.get_text_width(texts["title"], self.S, 2) // 2),
+        #     y=60 * self.S,
+        #     font=self.FONT_B,
+        #     pixel_size=self.S,
+        #     spacing=2
+        # )
+
+        # self.legal_notice = self.draw_text(
+        #     self.canvas, text=texts["legal_notice"],
+        #     x=(self.center_pos[0]) - self.get_text_width(texts["legal_notice"], self.S) // 2,
+        #     y=90 * self.S, pixel_size=self.S
+        #     )
+
+        # for line_index, line in enumerate(texts["mission_objective"].split("\n")):
+        #     # print(len(line) * (5 + 1)) - this line actually saved me
             
-            text_width = self.get_text_width(line, pixel_size=self.S, spacing=self.S, font_width=self.FONT["width"])
+        #     text_width = self.get_text_width(line, pixel_size=self.S, spacing=self.S, font_width=self.FONT["width"])
 
 
-            print(f"text width: {text_width}")
+        #     print(f"text width: {text_width}")
 
 
-            print(((self.VIRT_W * self.S) // 2) - (text_width // 2))
+        #     print(((self.VIRT_W * self.S) // 2) - (text_width // 2))
 
-            # self.draw_text(self.canvas, line, (self.center_pos[0] // 2) - (text_width // 2), (line_index * 20) + 100, self.S * 1, spacing)
-            self.draw_text(self.canvas, line, x=(self.center_pos[0]) - (text_width // 2), y=((line_index) * 16 + 120) * self.S, pixel_size=self.S, spacing=self.S)
+        #     # self.draw_text(self.canvas, line, (self.center_pos[0] // 2) - (text_width // 2), (line_index * 20) + 100, self.S * 1, spacing)
+        #     self.draw_text(self.canvas, line, x=(self.center_pos[0]) - (text_width // 2), y=((line_index) * 16 + 120) * self.S, pixel_size=self.S, spacing=self.S)
+
 
         # self.draw_text(self.canvas, texts["prompt"], (self.center_pos[0] - (text_width // 2)), 100)
 
-        self.prompt = self.draw_text(
-            self.canvas,
-            text = texts["prompt"],
-            x = self.center_pos[0] - self.get_text_width(texts["prompt"], self.S, self.S) // 2,
-            y = 260 * self.S,
-            pixel_size = self.S,
-            spacing = self.S
-        )
+        # self.prompt = self.draw_text(
+        #     self.canvas,
+        #     text = texts["prompt"],
+        #     x = self.center_pos[0] - self.get_text_width(texts["prompt"], self.S, self.S) // 2,
+        #     y = 260 * self.S,
+        #     pixel_size = self.S,
+        #     spacing = self.S
+        # )
+
+
+
 
 
         

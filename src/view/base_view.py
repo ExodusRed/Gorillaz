@@ -5,8 +5,12 @@ import importlib
 # from model.char_model import CharModel
 # from model.font_model import FontModel
 
+from model.font_model import FontModel
+from model.text_model import TextModel
+
 # import view.view_utils as view_utils
-from view.view_utils import draw_text, get_font, draw_char_at
+from view.view_utils import draw_text, get_font
+from view.renderer.text_renderer import TextRenderer
 
 
 class BaseView(tk.Frame):
@@ -28,7 +32,14 @@ class BaseView(tk.Frame):
         # self.controller = controller
         # self.model = model
 
+
         self.master = master
+
+        self.canvas = tk.Canvas(self, bg=self.BG)
+        self.canvas.pack(fill="both", expand=True)
+
+        
+        self.text_renderer = TextRenderer(self.canvas)
 
         base_name = self.__class__.__name__.replace("View", "").lower()
         class_prefix = base_name.capitalize()
@@ -36,7 +47,11 @@ class BaseView(tk.Frame):
         self.FONT = get_font("5x9")
         self.FONT_B = get_font("5x9b")
 
+        self.FONT = FontModel("5x9", get_font("5x9")["glyphs"])
+
         # self.font_model = FontModel()
+
+        self.text_model = TextModel
 
 
 
@@ -69,8 +84,8 @@ class BaseView(tk.Frame):
         # self.CENTER_POS = self.get_center_position() # Or is it not a static var?
 
 
-        self.canvas = tk.Canvas(self, bg=self.BG)
-        self.canvas.pack(fill="both", expand=True)
+        # self.canvas = tk.Canvas(self, bg=self.BG)
+        # self.canvas.pack(fill="both", expand=True)
 
     # def get_font(self, size=None):
     #     return (self.FONT, size if size else self.FONT_SIZE)
@@ -85,13 +100,47 @@ class BaseView(tk.Frame):
             style.update(override)
         return style
     
-    def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, font=get_font("5x9"), pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
-        draw_text(canvas, text, x, y, font, pixel_size, spacing, color)
+
+    # def draw_text()
+    
+    # def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, font=get_font("5x9"), pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
+    #     draw_text(canvas, text, x, y, font, pixel_size, font, spacing, color)
+
+    # def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, font=get_font("5x9"), pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
+        # draw_text(canvas, text, x, y, font, pixel_size, font, spacing, color)
+
+    # def draw_text(self, text_model: TextModel, color: str = "#FFFFFF"):
+    #     # 1) erase previous
+    #     text_model.clear_from_canvas(self.canvas)
+
+    #     # 2) draw each character
+    #     cw, ch = self.font.get_size()
+    #     x0, y0 = text_model.x, text_model.y
+    #     text_model.char_rects = []
+
+    #     for idx, ch_ in enumerate(text_model.text):
+    #         bitmap = self.font.get_char_bitmap(ch_)
+    #         rects = []
+    #         x_char = x0 + idx*(cw*text_model.pixel_size + text_model.spacing*text_model.pixel_size)
+
+    #         for row_i, row in enumerate(bitmap):
+    #             for col_i, bit in enumerate(row):
+    #                 if bit == "1":
+    #                     x1 = x_char + col_i*text_model.pixel_size
+    #                     y1 = y0     + row_i*text_model.pixel_size
+    #                     r  = self.canvas.create_rectangle(
+    #                           x1, y1,
+    #                           x1 + text_model.pixel_size,
+    #                           y1 + text_model.pixel_size,
+    #                           fill=color, outline=color
+    #                         )
+    #                     rects.append(r)
+    #         text_model.char_rects.append(rects)
 
     # def draw_char_at(self, canvas, )
 
-    def draw_char_at(self, canvas, char_model, char: str, x: int, y: int, pixel_size: int, color="#FFFFFF"):
-        draw_char_at(canvas, char_model, x, y, pixel_size, color)
+    # def draw_char_at(self, canvas, char_model, char: str, x: int, y: int, pixel_size: int, color="#FFFFFF"):
+        # draw_char_at(canvas, char_model, x, y, pixel_size, color)
 
     def get_center_position(self):
         self.update_idletasks()
