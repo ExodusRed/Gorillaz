@@ -10,6 +10,8 @@ from model.text_model import TextModel
 from model.char_model import CharModel
 from view.char_view import CharView
 
+from view.renderer.text_renderer import TextRenderer
+
 def get_font(name):
     return ALL_FONTS[name]
 
@@ -134,5 +136,8 @@ def get_font(name):
 #         text_model.char_rects.append(char_rects)
 #         x += font_width * text_model.pixel_size + spacing
 
-def draw_text(canvas, text_model: TextModel, font_model: FontModel, spacing: int, color="#FFFFFF"):
-    pass
+# def draw_text(canvas, text_model: TextModel, font_model: FontModel, spacing: int, color="#FFFFFF"):
+    # pass
+
+# def draw_text(self, canvas, text_model):
+    # TextRenderer.draw_text()

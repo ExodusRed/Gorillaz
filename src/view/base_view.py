@@ -9,7 +9,8 @@ from model.font_model import FontModel
 from model.text_model import TextModel
 
 # import view.view_utils as view_utils
-from view.view_utils import draw_text, get_font
+# from view.view_utils import draw_text, get_font
+from view.view_utils import get_font
 from view.renderer.text_renderer import TextRenderer
 
 
@@ -51,7 +52,7 @@ class BaseView(tk.Frame):
 
         # self.font_model = FontModel()
 
-        self.text_model = TextModel
+        # self.text_model = TextModel()
 
 
 

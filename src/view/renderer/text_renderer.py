@@ -36,7 +36,8 @@ class TextRenderer:
     #                     rects.append(r)
     #         text_model.char_rects.append(rects)
 
-    def draw_text(self, canvas, text, x, y, font, pixel_size=2, spacing=1, color="#FFFFFF"):
+    # def draw_text(self, canvas, text, x, y, font, pixel_size=2, spacing=1, color="#FFFFFF"):
+    def draw_text(self, canvas, text_model):
     # Draws pixel font text on a canvas.
     
     # - canvas: Tkinter Canvas
@@ -47,15 +48,16 @@ class TextRenderer:
     # - spacing: space between characters
     # - color: color of the 'on' pixels
 
-        for char_index, char in enumerate(text):
+        for char_index, char in enumerate(text_model.text):
             # char_bitmap = PIXEL_FONT_8X8.get(char)
             # char_bitmap = font.glyphs.get(char)
             # print(font["glyphs"])
             # print(font.glyphs)
             # print(font["glyphs"])
             # char_bitmap = font["glyphs"].get(char)
-            char_bitmap = font.get_char_bitmap(char)
-            char_size = font.get_size()
+            # char_bitmap = text_model.font.get_char_bitmap(char)
+            char_bitmap = text_model.font.get_char_bitmap(char)
+            char_size = text_model.font.get_size()
             rects = []
 
             print("after rects")
@@ -67,21 +69,21 @@ class TextRenderer:
                 continue
                 # char_bitmap = font.glyphs.get("?")
 
-            char_x = x + char_index * ((8 * pixel_size) + spacing) # font pixel width? Take as arg?
-            char_x = x + char_index * ((5 * pixel_size) + spacing)
-            char_x = x + char_index * ((char_size[0] * pixel_size) + spacing)
+            char_x = text_model.x + char_index * ((8 * text_model.pixel_size) + text_model.spacing) # font pixel width? Take as arg?
+            char_x = text_model.x + char_index * ((5 * text_model.pixel_size) + text_model.spacing)
+            char_x = text_model.x + char_index * ((char_size[0] * text_model.pixel_size) + text_model.spacing)
 
             for row_index, row in enumerate(char_bitmap):
                 print("for row in bitmap")
                 for col_index, pixel in enumerate(row):
                     if pixel == '1':
                         r = canvas.create_rectangle(
-                            char_x + col_index * pixel_size,
-                            y + row_index * pixel_size,
-                            char_x + (col_index + 1) * pixel_size,
-                            y + (row_index + 1) * pixel_size,
+                            char_x + col_index * text_model.pixel_size,
+                            y + row_index * text_model.pixel_size,
+                            char_x + (col_index + 1) * text_model.pixel_size,
+                            y + (row_index + 1) * text_model.pixel_size,
                             outline="",
-                            fill=color
+                            fill=text_model.color
                         )
                         rects.append(r)
 

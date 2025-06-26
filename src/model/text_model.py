@@ -4,11 +4,11 @@ from model.font_model import FontModel
 # import tkinter as tk
 
 class TextModel:
-    def __init__(self, text: str, x: int, y: int, font: FontModel, pixel_size: int, spacing: int, color="#FFFFFF"):
+    def __init__(self, text: str, x: int, y: int, font_model: FontModel, pixel_size: int, spacing: int, color="#FFFFFF"):
         self.text = text
         self.x = x
         self.y = y
-        self.font = FontModel
+        self.font = font_model
         self.pixel_size = pixel_size
         self.spacing = spacing
         self.color = color
@@ -35,3 +35,12 @@ class TextModel:
         total_height = cell_h
 
         return (total_width, total_height)
+    
+    def set_text(self, new_text: str):
+        self.text = new_text
+
+    def clear_from_canvas(self, canvas):
+        for char_rect_list in self.char_rects:
+            for rect_id in char_rect_list:
+                canvas.delete(rect_id)
+        self.char_rects.clear()

@@ -18,7 +18,13 @@ class BootView(BaseView):
         # titel_input_model = self.text_model("Hello World!", 100, 100, self.FONT, 1, 1, "#FFFFFF")
 
         # self.text_renderer.draw_text(titel_input_model, self.FONT)
-        donkey = self.text_renderer.draw_text(self.canvas, "Donkey", 100, 100, self.FONT, 1, 1)
+        # donkey = self.text_renderer.draw_text(self.canvas, "Donkey", 100, 100, self.FONT, 1, 1)
+
+        txt = self.text_model("Donkey", 100, 100, self.FONT, 1, 1)
+        # txt = TextModel("")
+
+        # self.text_renderer.draw_text(self.canvas, txt)
+
         # draw_text(canvas, text, x, y, font, pixel_size=2, spacing=1, color="#FFFFFF"):
 
         # self.after(1000, lambda: donkey.)
