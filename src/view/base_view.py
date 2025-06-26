@@ -50,7 +50,7 @@ class BaseView(tk.Frame):
         # self.FONT_B = get_font("5x9b")
 
         self.FONT = FontModel("5x9", get_font("5x9")["glyphs"])
-        self.FONT_B = FontModel("5x9b", get_font("5x9b")["glyphs"])
+        self.FONT_B = FontModel("6x9b", get_font("6x11b")["glyphs"])
 
         # self.font_model = FontModel()
 
