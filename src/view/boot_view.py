@@ -20,7 +20,10 @@ class BootView(BaseView):
         # self.text_renderer.draw_text(titel_input_model, self.FONT)
         # donkey = self.text_renderer.draw_text(self.canvas, "Donkey", 100, 100, self.FONT, 1, 1)
 
-        txt = self.text_model("Donkey", 100, 100, self.FONT, 1, 1)
+        txt = self.text_model("Donkey", 100, 100, self.FONT, 1*self.S, self.S*1)
+        
+
+        # self.after(2000, txt.clear_from_canvas(self.canvas))
         # txt = TextModel("")
 
         # self.text_renderer.draw_text(self.canvas, txt)
@@ -59,6 +62,10 @@ class BootView(BaseView):
         # print(self.center_pos[0], self.center_pos[1])
 
         txt = "Hello World!\nABC123"
+
+        txt2 = self.text_model(txt, 100, 100, self.FONT, 1, 1)
+        
+        txt_box = self.text_renderer.draw_text(self.canvas, txt2)
 
         # for text in texts:
         #     text_y = 30

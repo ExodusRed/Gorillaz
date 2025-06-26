@@ -79,9 +79,9 @@ class TextRenderer:
                     if pixel == '1':
                         r = canvas.create_rectangle(
                             char_x + col_index * text_model.pixel_size,
-                            y + row_index * text_model.pixel_size,
+                            text_model.y + row_index * text_model.pixel_size,
                             char_x + (col_index + 1) * text_model.pixel_size,
-                            y + (row_index + 1) * text_model.pixel_size,
+                            text_model.y + (row_index + 1) * text_model.pixel_size,
                             outline="",
                             fill=text_model.color
                         )

@@ -52,7 +52,7 @@ class BaseView(tk.Frame):
 
         # self.font_model = FontModel()
 
-        # self.text_model = TextModel()
+        self.text_model = TextModel
 
 
 
