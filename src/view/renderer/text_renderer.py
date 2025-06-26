@@ -56,6 +56,7 @@ class TextRenderer:
             # print(font["glyphs"])
             # char_bitmap = font["glyphs"].get(char)
             # char_bitmap = text_model.font.get_char_bitmap(char)
+            # char_bitmap = text_model.FONT.get_char_bitmap(char)
             char_bitmap = text_model.font.get_char_bitmap(char)
             char_size = text_model.font.get_size()
             rects = []

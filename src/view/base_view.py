@@ -22,7 +22,7 @@ class BaseView(tk.Frame):
     # FONT = "System"
 
     # FONT = get_font("5x9")
-    FONT_B = get_font("5x9b")
+    # FONT_B = get_font("5x9b")
 
     # FONT = FontModel()
 
@@ -45,10 +45,12 @@ class BaseView(tk.Frame):
         base_name = self.__class__.__name__.replace("View", "").lower()
         class_prefix = base_name.capitalize()
 
-        self.FONT = get_font("5x9")
-        self.FONT_B = get_font("5x9b")
+        # self.FONT = get_font("5x9")
+        #
+        # self.FONT_B = get_font("5x9b")
 
         self.FONT = FontModel("5x9", get_font("5x9")["glyphs"])
+        self.FONT_B = FontModel("5x9b", get_font("5x9b")["glyphs"])
 
         # self.font_model = FontModel()
 
