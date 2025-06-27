@@ -21,7 +21,7 @@ class FontModel:
     
     def get_size(self) -> tuple[int, int]:
         sample_char = next(iter(self._glyphs.values()))
-        print(f"get_size: {(len(sample_char[0]), len(sample_char))}")
+        # print(f"get_size: {(len(sample_char[0]), len(sample_char))}")
         return (len(sample_char[0]), len(sample_char))
     
     def __repr__(self):
