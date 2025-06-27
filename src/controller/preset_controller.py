@@ -20,6 +20,7 @@ class PresetController:
             # self.current_input += event.char
             # self.view.update_prompt_and_input(self.current_input, self.current_question_index)
             # self.view.update_prompt_and_input(event.char, self.current_question_index)
-            self.view.update_prompt_and_input(event.char, self.current_question_index)
+            # self.view.update_prompt_and_input(event.char, self.current_question_index)
+            print(event.char)
 
         

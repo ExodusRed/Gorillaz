@@ -61,7 +61,7 @@ class TextRenderer:
             char_size = text_model.font.get_size()
             rects = []
 
-            print("after rects")
+            # print("after rects")
             
             if not char_bitmap:
                 # continue  # skip missing characters 

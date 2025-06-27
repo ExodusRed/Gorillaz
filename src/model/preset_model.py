@@ -1,6 +1,6 @@
 class PresetModel:
     def __init__(self):
-        self.TEXT = {
+        self.QUESTIONS = {
             "q0": "Name of Player 1 (Default = 'Player 1'): ",
             "q1": "Name of Player 2 (Default = 'Player 2'): ",
             "q2": "Play to how many total points (Default = 3)? ",

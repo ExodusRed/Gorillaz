@@ -66,11 +66,11 @@ class BootView(BaseView):
                         self.text_model(
                             text = line,
                             x = (self.center_pos[0]) - (self.get_text_width(
-                                line, self.S, 1, 5) // 2),
-                            y = (x_cords[text_index] * self.S) + (line_index * 30),
+                                line, self.S, self.S, 5) // 2),
+                            y = (x_cords[text_index] * self.S) + (line_index * 10) * self.S,
                             font_model = self.FONT,
                             pixel_size = self.S,
-                            spacing = 1
+                            spacing = self.S
                         ),
                     )
                 )
@@ -82,11 +82,11 @@ class BootView(BaseView):
                         self.text_model(
                             text = texts[text],
                             x = (self.center_pos[0]) - (self.get_text_width(
-                                texts[text], self.S * 2 if text_index == 0 else self.S, 1, 5) // 2),
+                                texts[text], self.S * 2 if text_index == 0 else self.S, self.S, 5) // 2),
                             y = x_cords[text_index] * self.S,
                             font_model = self.FONT,
                             pixel_size = self.S * 2 if text_index == 0 else self.S,
-                            spacing = 1
+                            spacing = self.S
                         ),
                     )
                 )
