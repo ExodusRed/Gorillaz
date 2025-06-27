@@ -145,6 +145,13 @@ class BaseView(tk.Frame):
     # def draw_char_at(self, canvas, char_model, char: str, x: int, y: int, pixel_size: int, color="#FFFFFF"):
         # draw_char_at(canvas, char_model, x, y, pixel_size, color)
 
+    def get_text_size(self, text: str, font_width: int, font_height: int, scalar: int, spacing: int):
+        return (
+            (len(text) * font_width) * scalar + len(text) * spacing,
+            font_height * scalar
+        )
+
+
     def get_center_position(self):
         self.update_idletasks()
         print(self.VIRT_W, self.S)
@@ -155,8 +162,8 @@ class BaseView(tk.Frame):
     
     
     def get_text_width(self, text, pixel_size = 1, spacing = 1, font_width = 5):
-        print(f"font_width: {(pixel_size * font_width) + spacing}")
-        print(f"text_width: {((pixel_size * font_width) + spacing) * len(text)}")
+        # print(f"font_width: {(pixel_size * font_width) + spacing}")
+        # print(f"text_width: {((pixel_size * font_width) + spacing) * len(text)}")
         return ((pixel_size * font_width) + spacing) * len(text)
     
 

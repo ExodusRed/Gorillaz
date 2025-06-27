@@ -61,7 +61,7 @@ class TextRenderer:
             char_size = text_model.font.get_size()
             rects = []
 
-            print("after rects")
+            # print("after rects")
             
             if not char_bitmap:
                 # continue  # skip missing characters 
@@ -75,7 +75,7 @@ class TextRenderer:
             char_x = text_model.x + char_index * ((char_size[0] * text_model.pixel_size) + text_model.spacing)
 
             for row_index, row in enumerate(char_bitmap):
-                print("for row in bitmap")
+                # print("for row in bitmap")
                 for col_index, pixel in enumerate(row):
                     if pixel == '1':
                         r = canvas.create_rectangle(
