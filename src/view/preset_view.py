@@ -10,6 +10,7 @@ class PresetView(BaseView):
         super().__init__(master)
         self.S = scalar
         self.current_question_index = 0,
+        self.qc = 0
         self.current_input = "",
         # self.input_model
         
@@ -19,10 +20,17 @@ class PresetView(BaseView):
 
         self.QS = {}
 
+        self.question_text_models = {}
+
         self.center_pos = self.get_center_position()
         
 
         self.start_asking()
+        self.ask_next()
+
+    def ask_next(self):
+        self.qc += 1
+        print(self.model.QUESTIONS)
 
 
     def start_asking(self):
@@ -39,30 +47,50 @@ class PresetView(BaseView):
                 for line_index, line in enumerate(list(QUESTIONS[_q].split("\n"))):
                     q_text = self.text_model(
                         line, 
-                        self.center_pos[0] - self.get_text_width(line, self.S, self.S),
-                        (line_index * 10 + 20) * self.S,
+                        # self.center_pos[0] - self.get_text_width(line, self.S, self.S),
+                        (self.center_pos[0]) - (self.get_text_width(line, self.S, self.S, 5) // 2),
+                        (line_index * 10 + 200) * self.S,
                         self.FONT,
                         self.S,
                         self.S
                     )
-                    self.text_renderer.draw_text(
+                    self.question_text_models[f"q{q_index}"] = self.text_renderer.draw_text(
                         self.canvas,
                         q_text
                     )
             else:
                 # Draw the question as a single line
                 q_text = self.text_model(
-                    QUESTIONS[_q], 
-                    self.center_pos[0] - self.get_text_width(QUESTIONS[_q], self.S, self.S),
-                    (q_index * 10 + 50) * self.S,
-                    self.FONT,
-                    self.S,
-                    self.S
+
+                    text = QUESTIONS[_q],
+                    x = ((self.center_pos[0]) - (self.get_text_width(QUESTIONS[_q], self.S, self.S, 5) // 2)) - (60 * self.S),
+                    y = (q_index * 16 + 80) * self.S,
+                    font_model = self.FONT,
+                    pixel_size = self.S,
+                    spacing = self.S
                 )
                 self.text_renderer.draw_text(
                     self.canvas,
                     q_text
                 )
+
+                # self.text_models.append(
+                # self.text_renderer.draw_text(
+                #     self.canvas,
+                #     self.text_model(
+                #         text = line,
+                #         x = (self.center_pos[0]) - (self.get_text_width(
+                #             line, self.S, self.S, 5) // 2),
+                #         y = (100 * self.S) + (line_index * 10) * self.S,
+                #         font_model = self.FONT,
+                #         pixel_size = self.S,
+                #         spacing = self.S
+                #     ),
+                # )
+
+
+
+
 
         # self.text_renderer.draw_centered(titel_input_model)
         # pass
