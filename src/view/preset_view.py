@@ -9,35 +9,45 @@ class PresetView(BaseView):
     def __init__(self, master, scalar):
         super().__init__(master)
         self.S = scalar
-        self.current_question_index = 0,
-        self.qc = 0
+        self.current_question_index, self.qc = 0, 0,
+        self.caret_position = (0, 0)
         self.current_input = "",
-        # self.input_model
         
-        print("Welcome to PresetView!")
-        # self.update_idletasks()
-        # print(self.S)
-        
+        # print("Welcome to PresetView!")
+
         self.QUESTIONS = self.model.QUESTIONS
         
 
         self.QS = {}
 
-        self.question_text_models = {}
+        self.questions = []
 
         self.center_pos = self.get_center_position()
-        
+
 
         self.start_asking()
-        # self.ask_next()
 
     def ask_next(self):
         self.qc += 1
         print(self.model.QUESTIONS)
 
+    def anim_caret(self):
+    
+        if self.caret["visible"]:
+            self.caret["elem"].color = "#000000"
+            self.caret["visible"] = False
+        else:
+            self.caret["elem"].color = "#FFFFFF"
+            self.caret["visible"] = True
 
+        self.text_renderer.draw_text(self.canvas, self.caret["elem"])
 
+        if self.caret["running"]:
+            self.after(333, self.anim_caret)
 
+    def stop_caret_anim(self):
+        self.caret["running"] = False
+    
     def start_asking(self):
         print("start asking")
         if self.qc == 4:
@@ -46,25 +56,30 @@ class PresetView(BaseView):
             # Draw each line of the last question (split by newlines)
             for line_index, line in enumerate(list(self.QUESTIONS[list(self.QUESTIONS.keys())[self.qc]].split("\n"))):
                 q_text = self.text_model(
-                    line, 
-                    # self.center_pos[0] - self.get_text_width(line, self.S, self.S),
-                    (self.center_pos[0]) - (self.get_text_width(line, self.S, self.S, 5) // 2),
-                    (line_index * 10 + 200) * self.S,
-                    self.FONT,
-                    self.S,
-                    self.S
+                    text = line, 
+                    x = (self.center_pos[0]) - (self.get_text_width(line, self.S, self.S, 5) // 2),
+                    y = (line_index * 10 + 200) * self.S,
+                    font_model = self.FONT,
+                    pixel_size = self.S,
+                    spacing = self.S
                 )
-                self.question_text_models[f"q{self.qc}"] = self.text_renderer.draw_text(
-                    self.canvas,
-                    q_text
-                )
+
+                self.questions.append(q_text)
+
+        
+
+
         else:
             # Draw the question as a single line
+            element_width = self.get_text_width(self.QUESTIONS[list(self.QUESTIONS.keys())[self.qc]], self.S, self.S, 5)
+            element_x = ((self.center_pos[0]) - (element_width // 2)) - (60 * self.S)
+            element_y = (self.qc * 16 + 80) * self.S
+
             q_text = self.text_model(
 
                 text = self.QUESTIONS[list(self.QUESTIONS.keys())[self.qc]],
-                x = ((self.center_pos[0]) - (self.get_text_width(self.QUESTIONS[list(self.QUESTIONS.keys())[self.qc]], self.S, self.S, 5) // 2)) - (60 * self.S),
-                y = (self.qc * 16 + 80) * self.S,
+                x = element_x,
+                y = element_y,
                 font_model = self.FONT,
                 pixel_size = self.S,
                 spacing = self.S
@@ -74,8 +89,27 @@ class PresetView(BaseView):
                 q_text
             )
 
+            self.questions.append(q_text)
 
+            if (self.qc == 0):
+                self.caret = {
+                    "elem" : self.text_model(
+                        "_", 100, 100,
+                        font_model = self.FONT,
+                        pixel_size = self.S,
+                        spacing = self.S,
+                    ),
+                    "running": True,
+                    "visible" : True,
+                }
 
+                self.anim_caret()
+
+            self.caret["elem"].x = element_x + element_width
+            self.caret["elem"].y = element_y
+
+            self.text_renderer.draw_text(self.canvas, self.caret["elem"])
+        
 
 
 

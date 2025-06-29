@@ -48,6 +48,11 @@ class TextRenderer:
     # - spacing: space between characters
     # - color: color of the 'on' pixels
 
+        # rects = {}
+        rect_ids = []
+
+        chars = {}
+
         for char_index, char in enumerate(text_model.text):
             # char_bitmap = PIXEL_FONT_8X8.get(char)
             # char_bitmap = font.glyphs.get(char)
@@ -59,7 +64,8 @@ class TextRenderer:
             # char_bitmap = text_model.FONT.get_char_bitmap(char)
             char_bitmap = text_model.font.get_char_bitmap(char)
             char_size = text_model.font.get_size()
-            rects = []
+            # rects = []
+            # rects = {}
 
             # print("after rects")
             
@@ -70,11 +76,14 @@ class TextRenderer:
                 continue
                 # char_bitmap = font.glyphs.get("?")
 
-            char_x = text_model.x + char_index * ((8 * text_model.pixel_size) + text_model.spacing) # font pixel width? Take as arg?
-            char_x = text_model.x + char_index * ((5 * text_model.pixel_size) + text_model.spacing)
+            # char_x = text_model.x + char_index * ((8 * text_model.pixel_size) + text_model.spacing) # font pixel width? Take as arg?
+            # char_x = text_model.x + char_index * ((5 * text_model.pixel_size) + text_model.spacing)
             char_x = text_model.x + char_index * ((char_size[0] * text_model.pixel_size) + text_model.spacing)
 
+            char_row = []
+
             for row_index, row in enumerate(char_bitmap):
+                char_col = []
                 # print("for row in bitmap")
                 for col_index, pixel in enumerate(row):
                     if pixel == '1':
@@ -86,7 +95,19 @@ class TextRenderer:
                             outline="",
                             fill=text_model.color
                         )
-                        rects.append(r)
+                        char_col.append(r)
+                        # rects.append(r)
+                        rect_ids.append(r)
+                char_row.append(char_col)
+            
+            chars[f"{char}"] = char_row
+
+        text_model.rect_ids = rect_ids
+
+        # return chars
+                    
+                        
+            
 
 
 

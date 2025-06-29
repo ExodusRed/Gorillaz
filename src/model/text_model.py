@@ -13,7 +13,8 @@ class TextModel:
         self.spacing = spacing
         self.color = color
         # self.char_rects = list[list[list[int]]] = []
-        self.char_rects = []
+        # self.char_rects = []
+        self.rect_ids = []
 
     def clear_from_canvas(self, canvas):
         for char_rect_list in self.char_rects:
