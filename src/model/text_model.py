@@ -16,11 +16,11 @@ class TextModel:
         # self.char_rects = []
         self.rect_ids = []
 
-    def clear_from_canvas(self, canvas):
-        for char_rect_list in self.char_rects:
-            for rect_id in char_rect_list:
-                canvas.delete(rect_id)
-        self.char_rects.clear()
+    # def clear_from_canvas(self, canvas):
+    #     for char_rect_list in self.char_rects:
+    #         for rect_id in char_rect_list:
+    #             canvas.delete(rect_id)
+    #     self.char_rects.clear()
 
     def get_dimension(self, font_model) -> tuple[int, int]:
         char_w, char_h = font_model.get_size()
@@ -41,7 +41,11 @@ class TextModel:
         self.text = new_text
 
     def clear_from_canvas(self, canvas):
-        for char_rect_list in self.char_rects:
-            for rect_id in char_rect_list:
-                canvas.delete(rect_id)
-        self.char_rects.clear()
+        # for char_rect_list in self.rect_ids:
+        #     for rect_id in char_rect_list:
+        #         canvas.delete(rect_id)
+
+        for rect_id in self.rect_ids:
+            canvas.delete(rect_id)
+        # self.char_rects.clear()
+        self.rect_ids.clear()

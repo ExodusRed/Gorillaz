@@ -7,3 +7,5 @@ class PresetModel:
             "q3": "Gravity in Meters/Sec (Earth = 9.8)? ",
             "q4": "--------------\n\nV = View Intro\nP = Playe Game\n\nYour Choice?"
         }
+
+        self.answers = {}

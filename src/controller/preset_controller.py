@@ -11,10 +11,13 @@ class PresetController:
 
         self.view.focus()
         self.view.bind("<Key>", lambda e: self.on_key_press(event = e))
+        # self.view.bind("<Delete>", lambda e: self.on_key_press(event = e))
 
     def on_key_press(self, event):
         if event.keysym == "Return":
             self.current_question_index += 1
+        if event.keysym == "BackSpace":
+            self.view.delete_from_input()
         if event.char.isprintable():
             # self.current_input += 
             # self.current_input += event.char
@@ -22,5 +25,6 @@ class PresetController:
             # self.view.update_prompt_and_input(event.char, self.current_question_index)
             # self.view.update_prompt_and_input(event.char, self.current_question_index)
             print(event.char)
+            self.view.update_input(event.char)
 
         
