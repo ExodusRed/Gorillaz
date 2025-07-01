@@ -149,6 +149,10 @@ class PresetView(BaseView):
             element_x = ((self.center_pos[0]) - (element_width // 2)) - (60 * self.S)
             element_y = (self.qc * 16 + 80) * self.S
 
+            
+            self.caret_position = [element_x + element_width, element_y]
+            self.current_input_position = [element_x + element_width, element_y]
+
             q_text = self.text_model(
                 text = self.QUESTIONS[list(self.QUESTIONS.keys())[self.qc]],
                 x = element_x,
@@ -160,7 +164,7 @@ class PresetView(BaseView):
 
             a_text = self.text_model(
                 text = "",
-                x = 0,
+                x = self.current_input_position[0],
                 y = 0,
                 font_model = self.FONT,
                 pixel_size = self.S,
@@ -204,7 +208,11 @@ class PresetView(BaseView):
 
             # self.current_input_position[0] = element_x + element_width
 
-            self.caret_position[0] = element_x + element_width
+
+
+            # self.caret_position = [element_x + element_width, element_y]
+            # self.current_input_position = [element_x + element_width, element_y]
+
             self.caret_position[1] = element_y
             
             # self.current_input_position[1] = element_y
