@@ -14,11 +14,14 @@ class PresetController:
         # self.view.bind("<Delete>", lambda e: self.on_key_press(event = e))
 
     def on_key_press(self, event):
+        print(event.keysym)
         if event.keysym == "Return":
             self.current_question_index += 1
-        if event.keysym == "BackSpace":
+        elif event.keysym == "BackSpace":
             self.view.delete_from_input()
-        if event.char.isprintable():
+        elif event.keysym == "Shift_L" or event.keysym == "Shift_R":
+            pass
+        elif event.char.isprintable():
             # self.current_input += 
             # self.current_input += event.char
             # self.view.update_prompt_and_input(self.current_input, self.current_question_index)
