@@ -14,8 +14,9 @@ class PresetView(BaseView):
         self.caret_position = [0, 0]
 
         # self.caret_position = 
-        self.current_input = ""
-        self.current_input_text = None
+        self.current_input = None
+        self.current_input_value = ""
+        # self.current_input_text = None
         
         # print("Welcome to PresetView!")
 
@@ -26,6 +27,7 @@ class PresetView(BaseView):
         # self.AS = {}
 
         self.questions = []
+        self.answers = []
 
         self.center_pos = self.get_center_position()
 
@@ -55,44 +57,29 @@ class PresetView(BaseView):
 
     def delete_from_input(self):
         # self.current_input.
-        print(self.model.answers[f"a{self.qc}"])
+        # print(self.model.answers[f"a{self.qc}"])
+        self.current_input_value = self.current_input_value[:-1]
+        # self.model.answers[f"a{self.qc}"] = self.model.answers[f"q{self.qc}"][:-1]
+
+        # self.answers[self.qc]
+        self.text_renderer(self.canvas, self.answers[self.qc])
+        # self.answers // need array of text objects // change self.asnwers to save text only??
         self.current_input.clear_from_canvas(self.canvas)
+
 
     def update_input(self, char):
         print("view: ", char)
         # append letter at location from current_input + (letter_width + spacing * pxiel_size (self.S))
-        # self.current_input
 
-        # self.current_char_location = 
 
-        # self.caret["elem"].clear_from_canvas(self.canvas)
+        self.current_input_value += char
 
-        
-
-        # if char == " ":
-        #     self.caret["elem"].clear_from_canvas(self.canvas)
-        #     self.current_input_position[0] += (self.FONT.get_size()[0] * self.S + self.S)
-        #     self.caret["elem"].x = self.current_input_position[0]
-
-        #     self.model.answers[f"a{self.qc}"] + char
-
-        #     return
-            
-
-        # else:
-
-        # if char == " ":
-
-        # self.model.answers[f"a{self.qc}"] += char
-
-        self.current_input_text += char
-
-        if self.current_input != "":
+        if self.current_input != None:
             self.current_input.clear_from_canvas(self.canvas) # ?
     
 
         self.current_input = self.text_model(
-            text = self.current_input_text,
+            text = self.current_input_value,
             x = self.current_input_position[0],
             y = self.current_input_position[1],
             font_model = self.FONT,
@@ -100,24 +87,6 @@ class PresetView(BaseView):
             spacing = self.S
         )
 
-        # self.current_input_position[0] += (self.FONT.get_size()[0] * self.S + self.S)
-
-        # self.caret_position[0] += ((self.FONT.get_size()[0] * self.S) + self.S) * len(self.model.answers[f"a{self.qc}"])
-
-        # self.caret["elem"].move(10)
-
-        # self.caret["elem"].clear_from_canvas(self.canvas)
-
-        # self.caret["elem"].x = self.current_input_position[0]
-        # self.caret["elem"].y = self.current_input_position[1]
-
-        # self.caret["elem"].y = 
-
-        # todo:
-        # draw char
-        # update location
-
-        # self.model.answers[f"a{self.qc}"] + char
 
         
 
@@ -134,11 +103,13 @@ class PresetView(BaseView):
             self.canvas,
             self.current_input
         )
+
+        print(self.current_input_value)
     
     def start_asking(self):
         print("start asking")
-        self.current_input_text = ""
-        user_input = []
+        self.current_input_value = ""
+        # user_input = []
         if self.qc == 4:
                 # for q in _q
             print("q3 ->")
@@ -152,6 +123,9 @@ class PresetView(BaseView):
                     pixel_size = self.S,
                     spacing = self.S
                 )
+
+                # move input to current line
+
                 self.questions.append(q_text)
                  
         else:
@@ -164,35 +138,45 @@ class PresetView(BaseView):
             self.caret_position = [element_x + element_width, element_y]
             self.current_input_position = [element_x + element_width, element_y]
 
-            q_text = self.text_model(
+            self.questions.append(self.text_model(
                 text = self.QUESTIONS[list(self.QUESTIONS.keys())[self.qc]],
                 x = element_x,
                 y = element_y,
                 font_model = self.FONT,
                 pixel_size = self.S,
                 spacing = self.S
-            )
+            ))
 
-            a_text = self.text_model(
+            self.answers.append(self.text_model(
                 text = "",
                 x = self.current_input_position[0],
                 y = 0,
                 font_model = self.FONT,
                 pixel_size = self.S,
                 spacing = self.S
-            )
+            ))
 
             self.text_renderer.draw_text(
                 self.canvas,
-                q_text
+                self.questions[self.qc]
             )
 
-            self.questions.append(q_text)
+            # self.questions.append(q_text)
+            # self.answers.append(a_text)
             # self.model.answers[f"a{self.qc}"] = ""
             # self.model.answers[f"a{self.qc}"].text = a_text
 
             if (self.qc == 0):
-                self.input = self.text_model(
+                # self.input = self.text_model(
+                #     "",
+                #     x = 0,
+                #     y = 0,
+                #     font_model = self.FONT,
+                #     pixel_size = self.S,
+                #     spacing = self.S,
+                # )
+
+                self.answers[self.qc] = self.text_model(
                     "",
                     x = 0,
                     y = 0,
@@ -215,21 +199,9 @@ class PresetView(BaseView):
                 self.anim_caret()
 
             
-            # self.current_input_position[0] = element_x + element_width
-
-            # self.current_input_position[0] = element_x + element_width
-
-
-
-            # self.caret_position = [element_x + element_width, element_y]
-            # self.current_input_position = [element_x + element_width, element_y]
 
             self.caret_position[1] = element_y
             
-            # self.current_input_position[1] = element_y
-
-            # self.caret["elem"].x = element_x + element_width + (self.S + self.S)
-            # self.caret["elem"].x = self.current_input_position[0] + (self.FONT.get_size()[0] * self.S + self.S)
 
             self.caret["elem"].x = self.caret_position[0]
             self.caret["elem"].y = self.caret_position[1]
