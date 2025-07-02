@@ -19,6 +19,8 @@ class PresetController:
             self.current_question_index += 1
         elif event.keysym == "BackSpace":
             self.view.delete_from_input()
+        elif event.keysym == "Return":
+            self.view.ask_next()
         elif event.keysym == "Shift_L" or event.keysym == "Shift_R":
             pass
         elif event.char.isprintable():
