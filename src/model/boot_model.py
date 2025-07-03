@@ -5,7 +5,7 @@ class BootModel:
         self.texts = {
             # "title": "Python GORILLAS",
             "title": "PYTHON GORILLAS",
-            "legal_notice": "Copyleft (\u2183)",
+            "legal_notice": "Copyleft (|)",
             "mission_objective": textwrap.dedent("""
                     Your mission is to hit your opponent with the exploding 
                     banana by varying the angle and power of your throw, taking
@@ -15,4 +15,7 @@ class BootModel:
                 """).strip(),
             "prompt": "<Press any key to continue>"
         }
+
+
+# "legal_notice": "Copyleft (\u2183)",
 

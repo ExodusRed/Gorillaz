@@ -16,11 +16,10 @@ class PresetController:
     def on_key_press(self, event):
         print(event.keysym)
         if event.keysym == "Return":
-            self.current_question_index += 1
+            self.view.qc += 1
+            self.view.ask_next()
         elif event.keysym == "BackSpace":
             self.view.delete_from_input()
-        elif event.keysym == "Return":
-            self.view.ask_next()
         elif event.keysym == "Shift_L" or event.keysym == "Shift_R":
             pass
         elif event.char.isprintable():
@@ -29,7 +28,7 @@ class PresetController:
             # self.view.update_prompt_and_input(self.current_input, self.current_question_index)
             # self.view.update_prompt_and_input(event.char, self.current_question_index)
             # self.view.update_prompt_and_input(event.char, self.current_question_index)
-            print(event.char)
+            print(event.char, "??")
             self.view.update_input(event.char)
 
         
