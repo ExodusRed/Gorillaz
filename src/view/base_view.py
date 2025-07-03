@@ -104,46 +104,6 @@ class BaseView(tk.Frame):
         return style
     
 
-    # def draw_text()
-    
-    # def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, font=get_font("5x9"), pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
-    #     draw_text(canvas, text, x, y, font, pixel_size, font, spacing, color)
-
-    # def draw_text(self, canvas: tk.Canvas, text: str, x: int, y: int, font=get_font("5x9"), pixel_size = 2, spacing: int = 1, color: str = "#FFFFFF"):
-        # draw_text(canvas, text, x, y, font, pixel_size, font, spacing, color)
-
-    # def draw_text(self, text_model: TextModel, color: str = "#FFFFFF"):
-    #     # 1) erase previous
-    #     text_model.clear_from_canvas(self.canvas)
-
-    #     # 2) draw each character
-    #     cw, ch = self.font.get_size()
-    #     x0, y0 = text_model.x, text_model.y
-    #     text_model.char_rects = []
-
-    #     for idx, ch_ in enumerate(text_model.text):
-    #         bitmap = self.font.get_char_bitmap(ch_)
-    #         rects = []
-    #         x_char = x0 + idx*(cw*text_model.pixel_size + text_model.spacing*text_model.pixel_size)
-
-    #         for row_i, row in enumerate(bitmap):
-    #             for col_i, bit in enumerate(row):
-    #                 if bit == "1":
-    #                     x1 = x_char + col_i*text_model.pixel_size
-    #                     y1 = y0     + row_i*text_model.pixel_size
-    #                     r  = self.canvas.create_rectangle(
-    #                           x1, y1,
-    #                           x1 + text_model.pixel_size,
-    #                           y1 + text_model.pixel_size,
-    #                           fill=color, outline=color
-    #                         )
-    #                     rects.append(r)
-    #         text_model.char_rects.append(rects)
-
-    # def draw_char_at(self, canvas, )
-
-    # def draw_char_at(self, canvas, char_model, char: str, x: int, y: int, pixel_size: int, color="#FFFFFF"):
-        # draw_char_at(canvas, char_model, x, y, pixel_size, color)
 
     def get_text_size(self, text: str, font_width: int, font_height: int, scalar: int, spacing: int):
         return (
