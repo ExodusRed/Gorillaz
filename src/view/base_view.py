@@ -147,8 +147,11 @@ class BaseView(tk.Frame):
 
     def get_text_size(self, text: str, font_width: int, font_height: int, scalar: int, spacing: int):
         return (
-            (len(text) * font_width) * scalar + len(text) * spacing,
-            font_height * scalar
+            # (len(text) * font_width) * scalar + len(text) * spacing,
+            # font_height * scalar
+
+            (len(text) * font_width) + len(text) * spacing,
+            font_height
         )
 
 
@@ -159,12 +162,14 @@ class BaseView(tk.Frame):
         print(f"VIRT_W: {self.VIRT_W}, VIR_H: {self.VIRT_H}, SCALAR: {self.S}")
         return ((self.VIRT_W * self.S) // 2, (self.VIRT_H * self.S) // 2)
 
+
+    def get_text_width(self, text_object):
+        return ((text_object.pixel_size * text_object.font.get_size()[0]) + text_object.spacing) * len(text_object.text)
     
-    
-    def get_text_width(self, text, pixel_size = 1, spacing = 1, font_width = 5):
+    # def get_text_width(self, text, pixel_size = 1, spacing = 1, font_width = 5):
         # print(f"font_width: {(pixel_size * font_width) + spacing}")
         # print(f"text_width: {((pixel_size * font_width) + spacing) * len(text)}")
-        return ((pixel_size * font_width) + spacing) * len(text)
+        # return ((pixel_size * font_width) + spacing) * len(text)
     
 
     

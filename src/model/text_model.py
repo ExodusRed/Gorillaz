@@ -21,7 +21,6 @@ class TextModel:
     #         for rect_id in char_rect_list:
     #             canvas.delete(rect_id)
     #     self.char_rects.clear()
-
     def get_dimension(self, font_model) -> tuple[int, int]:
         char_w, char_h = font_model.get_size()
         print(f"char_w: {char_w}, char_h: {char_h}")
@@ -32,7 +31,8 @@ class TextModel:
         if n == 0:
             return (0, cell_h)
         
-        total_width = n * cell_w + (n - 1) * self.spacing * self.pixel_size
+        # total_width = n * cell_w + (n - 1) * self.spacing * self.pixel_size
+        total_width = n * (cell_w + self.spacing)
         total_height = cell_h
 
         return (total_width, total_height)

@@ -60,13 +60,24 @@ class BootView(BaseView):
                 print("mission_objective")
                 for line_index, line in enumerate(list(texts[text].split("\n"))):
                     print(line)
+
+                    temp_text_model = self.text_model(
+                        text = line,
+                        x = 0,
+                        y = 0,
+                        font_model = self.FONT,
+                        pixel_size = self.S,
+                        spacing = self.S
+                    )
+                        
+
+
                     self.text_models.append(
                     self.text_renderer.draw_text(
                         self.canvas,
                         self.text_model(
                             text = line,
-                            x = (self.center_pos[0]) - (self.get_text_width(
-                                line, self.S, self.S, 5) // 2),
+                            x = (self.center_pos[0]) - (self.get_text_width(temp_text_model) // 2),
                             y = (x_cords[text_index] * self.S) + (line_index * 10) * self.S,
                             font_model = self.FONT,
                             pixel_size = self.S,
@@ -76,13 +87,22 @@ class BootView(BaseView):
                 )
 
             else:
+                text_model = self.text_model(
+                    text = texts[text],
+                    x = 0,
+                    y = 0,
+                    font_model = self.FONT,
+                    pixel_size = self.S * 2 if text_index == 0 else self.S,
+                    spacing = self.S
+                )
+
+
                 self.text_models.append(
                     self.text_renderer.draw_text(
                         self.canvas,
                         self.text_model(
                             text = texts[text],
-                            x = (self.center_pos[0]) - (self.get_text_width(
-                                texts[text], self.S * 2 if text_index == 0 else self.S, self.S, 5) // 2),
+                            x = (self.center_pos[0]) - (self.get_text_width(text_model) // 2),
                             y = x_cords[text_index] * self.S,
                             font_model = self.FONT,
                             pixel_size = self.S * 2 if text_index == 0 else self.S,
