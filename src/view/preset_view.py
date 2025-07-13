@@ -104,8 +104,11 @@ class PresetView(BaseView):
     def ask_next(self):
         self.current_input_value = ""
 
-        if type(self.model.QUESTIONS[f"q{self.qc}"]) == list:
+        # if type(self.model.QUESTIONS[f"q{self.qc}"]) == list:
+        if isinstance(self.model.QUESTIONS[f"q{self.qc}"], list):
+            print("IS INSTANCE NOT FUCKING TRIGGERING BITCH")
             for line_index, line in enumerate(list(self.QUESTIONS[list(self.QUESTIONS.keys())[self.qc]].split("\n"))):
+                print(f"line: {line}")
                 q_text = self.text_model(
                     text = line, 
                     x = (self.center_pos[0]) - (self.get_text_width(line, self.S, self.S, 5) // 2),
